@@ -5,12 +5,12 @@ using UnityEngine.Events;
 public class EventRelay : Singleton
 {
     public static SpawnEventClass Spawner { get; private set; }
-    public static MovementEventClass Movement { get; private set; }
+    public static ShooterEventClass Shooter { get; private set; }
     public static InputEventClass Input { get; private set; }
     private void Awake()
     {
         Spawner = new();
-        Movement = new();
+        Shooter = new();
         Input = new();
     }
 
@@ -21,10 +21,10 @@ public class SpawnEventClass
     public UnityEvent Spawn = new();
 }
 
-public class MovementEventClass
+public class ShooterEventClass
 {
-    public UnityEvent Move = new();
-    public UnityEvent Jump = new();
+    public UnityEvent DiceShot = new();
+    public UnityEvent EmptyShooter = new();
 }
 
 public class InputEventClass

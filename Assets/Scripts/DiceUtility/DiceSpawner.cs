@@ -2,15 +2,17 @@ using UnityEngine;
 
 public class DiceSpawner : MonoBehaviour, ISpawner
 {
-    [SerializeField] private GameObject dicePrefab;
+    [SerializeField] private DiceController dicePrefab;
 
-    public GameObject Spawn()
+    public DiceController Spawn()
     {
         // Instantiate the prefab
-        GameObject spawnedDice = Instantiate(dicePrefab, transform.position, Quaternion.identity);
+        DiceController dice = Instantiate(dicePrefab, transform.position, Quaternion.identity);
+        dice.GetComponent<Rigidbody>().useGravity = false;
+        dice.GetComponent<BoxCollider>().enabled = false;
 
-        // Optionally, you can perform additional setup for the spawned dice here
+        dice.Value = (int)Mathf.Pow(2, Random.Range(1, 7));
 
-        return spawnedDice;
+        return dice;
     }
 }
