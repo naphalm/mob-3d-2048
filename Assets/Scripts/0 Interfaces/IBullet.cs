@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface ISpawner
+public interface IBullet
 {
-    public DiceController Spawn();
+    public void Shoot();
 }
