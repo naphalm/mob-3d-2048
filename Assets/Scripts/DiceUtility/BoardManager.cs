@@ -26,6 +26,33 @@ public class BoardManager : MonoBehaviour
         Reload();
     }
 
+    static public void CombineDices(DiceController d1, DiceController d2)
+    {
+        if (d1.Value == d2.Value)
+        {
+            var magnitude1 = d1.GetComponent<Rigidbody>().velocity.magnitude;
+            var magnitude2 = d2.GetComponent<Rigidbody>().velocity.magnitude;
+
+            if (magnitude1 > magnitude2)
+            {
+                // Destroy dice2
+                Destroy(d2.gameObject);
+
+                d1.Value *= 2;
+                d1.ApplyCombineForce();
+                EventRelay.Dice.Combination.Invoke(d1.Value * 2, d1.transform);
+            }
+            else
+            {
+                Destroy(d1.gameObject);
+
+                d2.Value *= 2;
+                d2.ApplyCombineForce();
+                EventRelay.Dice.Combination.Invoke(d2.Value * 2, d2.transform);
+            }
+        }
+    }
+
     void OnDiceShot()
     {
         Reload();
@@ -35,8 +62,6 @@ public class BoardManager : MonoBehaviour
     {
         shooter.Shoot();
     }
-
-
 
     void Reload()
     {
