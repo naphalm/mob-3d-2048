@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class HorizontalSlider : MonoBehaviour
+public class HorizontalSlider : Singleton
 {
     public float sensitivity = 5f; // Adjust this value to control the sensitivity of movement
     public float minX = -2f; // Minimum X-axis value

@@ -28,28 +28,33 @@ public class BoardManager : MonoBehaviour
 
     static public void CombineDices(DiceController d1, DiceController d2)
     {
-        if (d1.Value == d2.Value)
+        // Check if either d1 or d2 is null
+        // if (d1 == null || d2 == null)
+        // {
+        //     Debug.LogWarning("CombineDices called with null reference(s).");
+        //     return;
+        // }
+
+        // if (d1.Value == d2.Value)
+        var magnitude1 = d1.GetComponent<Rigidbody>().velocity.magnitude;
+        var magnitude2 = d2.GetComponent<Rigidbody>().velocity.magnitude;
+
+        if (magnitude1 > magnitude2)
         {
-            var magnitude1 = d1.GetComponent<Rigidbody>().velocity.magnitude;
-            var magnitude2 = d2.GetComponent<Rigidbody>().velocity.magnitude;
+            // Destroy dice2
+            Destroy(d2.gameObject);
 
-            if (magnitude1 > magnitude2)
-            {
-                // Destroy dice2
-                Destroy(d2.gameObject);
+            d1.Value *= 2;
+            d1.ApplyCombineForce();
+            EventRelay.Dice.Combination.Invoke(d1.Value * 2, d1.transform);
+        }
+        else
+        {
+            Destroy(d1.gameObject);
 
-                d1.Value *= 2;
-                d1.ApplyCombineForce();
-                EventRelay.Dice.Combination.Invoke(d1.Value * 2, d1.transform);
-            }
-            else
-            {
-                Destroy(d1.gameObject);
-
-                d2.Value *= 2;
-                d2.ApplyCombineForce();
-                EventRelay.Dice.Combination.Invoke(d2.Value * 2, d2.transform);
-            }
+            d2.Value *= 2;
+            d2.ApplyCombineForce();
+            EventRelay.Dice.Combination.Invoke(d2.Value * 2, d2.transform);
         }
     }
 
