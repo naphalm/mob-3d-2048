@@ -8,12 +8,14 @@ public class EventRelay : Singleton
     public static ShooterEventClass Shooter { get; private set; }
     public static InputEventClass Input { get; private set; }
     public static DiceEventClass Dice { get; private set; }
+    public static GameManagerEvents GameManager { get; private set; }
     private void Awake()
     {
         Spawner = new();
         Shooter = new();
         Input = new();
         Dice = new();
+        GameManager = new();
     }
 
 }
@@ -37,5 +39,10 @@ public class InputEventClass
 
 public class DiceEventClass
 {
-    public UnityEvent<int, Transform> Combination;
+    public UnityEvent<int, Transform> Combination = new();
+}
+
+public class GameManagerEvents
+{
+    public UnityEvent Death = new();
 }

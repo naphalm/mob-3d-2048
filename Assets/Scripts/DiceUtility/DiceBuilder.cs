@@ -5,7 +5,7 @@ using UnityEngine.Assertions;
 
 public class DiceBuilder : MonoBehaviour
 {
-    [SerializeField] DiceController dice;
+    [SerializeField] BaseDice dice;
     [SerializeField] ValueController value;
     [SerializeField] ColorController color;
 
@@ -14,7 +14,7 @@ public class DiceBuilder : MonoBehaviour
         // dice = GetComponent<DiceController>();
         Assert.IsNotNull(dice, "DiceController null");
         // color = GetComponent<ColorController>();
-        Assert.IsNotNull(color, "ColorController null");
+        // Assert.IsNotNull(color, "ColorController null");
         // value = GetComponentInChildren<ValueController>();
         Assert.IsNotNull(value, "ColorController null");
     }
@@ -22,6 +22,6 @@ public class DiceBuilder : MonoBehaviour
     public void BuildDice(int val)
     {
         value.SetDiceValue(val);
-        color.SetColor(val);
+        color?.SetColor(val);
     }
 }

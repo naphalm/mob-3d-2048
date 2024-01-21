@@ -17,7 +17,7 @@ public class ColorController : MonoBehaviour
 
     public void SetColor(int value)
     {
-        Debug.Log("Setting color for value: " + value);
+        // Debug.Log("Setting color for value: " + value);
         Color color = colorMatch.GetColorForValue(value);
         if (material != null)
         {

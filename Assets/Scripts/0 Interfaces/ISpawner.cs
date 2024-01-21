@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface ISpawner
 {
-    public DiceController Spawn();
+    public BaseDice Spawn();
 }

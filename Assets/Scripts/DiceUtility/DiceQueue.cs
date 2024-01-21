@@ -6,8 +6,8 @@ using UnityEngine;
 public class DiceQueue : MonoBehaviour
 {
     private DiceSpawner spawner;
-    public List<DiceController> dq = new List<DiceController>();
-    public int maxHeldDice = 5; // Set your desired maximum number of held dice here
+    public List<BaseDice> dq = new();
+    public int maxHeldDice = 2; // Set your desired maximum number of held dice here
 
 
     private void Awake()
@@ -16,12 +16,24 @@ public class DiceQueue : MonoBehaviour
         InitializeDiceQueue();
     }
 
-    public DiceController GetNextDice()
+#if UNITY_EDITOR
+    private void Update()
+    {
+        // Check for the "U" key press
+        if (Input.GetKeyDown(KeyCode.U))
+        {
+            // Call the UpdateMaxHeldDice function with a new value (you can adjust this)
+            UpdateMaxHeldDice(maxHeldDice + 1);
+        }
+    }
+#endif
+
+    public BaseDice GetNextDice()
     {
 
         dq.Add(SpawnNew());
 
-        DiceController oldestDice = dq[0];
+        BaseDice oldestDice = dq[0];
         dq.RemoveAt(0);
         RepositionDice();
 
@@ -32,7 +44,7 @@ public class DiceQueue : MonoBehaviour
     {
         for (int i = 0; i < maxHeldDice; i++)
         {
-            DiceController dice = SpawnNew();
+            BaseDice dice = SpawnNew();
             dq.Add(dice);
         }
         RepositionDice();
@@ -42,11 +54,11 @@ public class DiceQueue : MonoBehaviour
     {
         for (int i = 0; i < dq.Count; i++)
         {
-            dq[i].transform.SetLocalPositionAndRotation(new Vector3(i, -i, 0), transform.rotation);
+            dq[i].transform.SetLocalPositionAndRotation(new Vector3(i * 1.1f, -i * 0.25f, 0), transform.rotation);
         }
     }
 
-    DiceController SpawnNew()
+    BaseDice SpawnNew()
     {
         var dice = spawner.Spawn();
         dice.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
@@ -55,5 +67,23 @@ public class DiceQueue : MonoBehaviour
         // dice.transform.SetPositionAndRotation(transform.position, transform.rotation);
 
         return dice;
+    }
+
+    // Function to dynamically increase the number of held dice
+    public void UpdateMaxHeldDice(int newMaxHeldDice)
+    {
+        if (newMaxHeldDice > maxHeldDice)
+        {
+            int diceToAdd = newMaxHeldDice - maxHeldDice;
+
+            for (int i = 0; i < diceToAdd; i++)
+            {
+                BaseDice dice = SpawnNew();
+                dq.Add(dice);
+            }
+
+            maxHeldDice = newMaxHeldDice;
+            RepositionDice();
+        }
     }
 }
