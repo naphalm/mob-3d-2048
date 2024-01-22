@@ -9,14 +9,14 @@ public class BaseDice : MonoBehaviour, IBullet
 
     public virtual void Shoot()
     {
+        transform.SetParent(null);
         MakeActive();
         ApplyShootForce();
         StartCoroutine(Wait());
     }
 
-    protected virtual void MakeActive()
+    public virtual void MakeActive()
     {
-        transform.SetParent(null);
         bc.enabled = true;
         rb.constraints = RigidbodyConstraints.None;
         rb.useGravity = true;
@@ -31,5 +31,15 @@ public class BaseDice : MonoBehaviour, IBullet
     {
         yield return null;
         EventRelay.Shooter.DiceShot.Invoke();
+    }
+
+    public virtual void RemoveDice()
+    {
+        Destroy(gameObject);
+    }
+
+    public virtual void PlayFx(bool activeSound)
+    {
+
     }
 }

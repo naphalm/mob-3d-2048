@@ -1,42 +1,47 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-
 public class DeathCondition : MonoBehaviour
 {
-    private List<BaseDice> diceList = new List<BaseDice>();
+    int counter = 0;
+    BoxCollider bc;
+    private void Start()
+    {
+        bc = GetComponent<BoxCollider>();
+        EventRelay.GameManager.Death.AddListener(OnLevelEnd);
+        EventRelay.GameManager.ContinueEnded.AddListener(OnContinueEnded);
+        counter = 0;
+    }
     private Coroutine timerCoroutine;
     public readonly float timerThreshold = .5f;
 
+
+
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Dice"))
-        {
-            // Increase dice counter
-            diceList.Add(other.GetComponent<BaseDice>());
 
-            if (diceList.Count >= 1 && timerCoroutine == null)
-            {
-                timerCoroutine = StartCoroutine(StartTimerCoroutine());
-            }
+        // Increase dice counter
+        counter++;
+
+        if (counter >= 1)
+        {
+            timerCoroutine = StartCoroutine(StartTimerCoroutine());
         }
+
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.CompareTag("Dice"))
-        {
-            // Decrease dice counter
-            diceList.Remove(other.GetComponent<BaseDice>());
 
-            // If there are no more dice, stop the timer
-            if (diceList.Count == 0 && timerCoroutine != null)
-            {
-                StopCoroutine(timerCoroutine);
-                timerCoroutine = null;
-            }
+        // Decrease dice counter
+        counter--;
+
+        // If there are no more dice, stop the timer
+        if (counter < 1 && timerCoroutine != null)
+        {
+            StopCoroutine(timerCoroutine);
+            timerCoroutine = null;
         }
+
     }
 
     private IEnumerator StartTimerCoroutine()
@@ -49,8 +54,20 @@ public class DeathCondition : MonoBehaviour
 
     private void HandleTimerThreshold()
     {
-        Debug.Log("DEATH!");
-        EventRelay.GameManager.Death.Invoke();
-        SceneManager.LoadScene(0);
+        if (counter > 0)
+        {
+            Debug.Log("DEATH!");
+            EventRelay.GameManager.Death.Invoke();
+        }
+    }
+
+    void OnLevelEnd()
+    {
+        bc.enabled = false;
+    }
+    void OnContinueEnded()
+    {
+        bc.enabled = true;
+        counter = 0;
     }
 }

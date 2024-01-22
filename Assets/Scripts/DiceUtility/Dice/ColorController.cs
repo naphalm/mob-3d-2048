@@ -40,33 +40,23 @@ class ColorMatch
         colorValues = new Dictionary<Color, int>();
 
         // Add color-value pairs to the hashtable
-        colorValues.Add(HexToColor("#FF2500"), 2); // 2
+        colorValues.Add(HexToColor("#f22020"), 2); // 2
         colorValues.Add(HexToColor("#345BEA"), 4); // 4
         colorValues.Add(HexToColor("#47EF00"), 8); // 8
         colorValues.Add(HexToColor("#FF00C0"), 16); // 16 
         colorValues.Add(HexToColor("#A909D9"), 32);  // 32 
         colorValues.Add(HexToColor("#FF8B00"), 64); // 64 
-        colorValues.Add(HexToColor("#00E2E1"), 128); // 128
+        colorValues.Add(HexToColor("#96341c"), 128); // 128 +
         colorValues.Add(HexToColor("#0004FF"), 256); // 256
         colorValues.Add(HexToColor("#007E24"), 512); // 512
-        colorValues.Add(HexToColor("#8600D4"), 1024); // 1024
-        colorValues.Add(HexToColor("#3F3F3F"), 2048); // 2048
-        colorValues.Add(HexToColor("#00B4FF"), 4096); // 4096
-        colorValues.Add(HexToColor("#002E55"), 8192); // 8192
-        colorValues.Add(HexToColor("#8E5986"), 16384); // 16384/
-        colorValues.Add(HexToColor("#E73700"), 32768); // 32768
-
-        // colorValues.Add(new Color32(155, 55, 55, 255), 256); // 256 //
-        // colorValues.Add(new Color32(255, 210, 0, 255), 512); // 512
-        // colorValues.Add(new Color32(0, 12, 202, 255), 1024); // 1024
-        // colorValues.Add(new Color32(130, 0, 48, 255), 2048); // 2048
-        // colorValues.Add(new Color32(36, 72, 55, 255), 4096); // 4096
-        // colorValues.Add(new Color32(255, 28, 0, 255), 8192); // 8192
-        // colorValues.Add(new Color32(38, 0, 127, 255), 16384); // 16384
-        // colorValues.Add(new Color32(45, 65, 41, 255), 32768); // 32768
-        // colorValues.Add(new Color32(0, 116, 55, 255), 65536); // 65536
-        //==
-        // colorValues.Add(new Color32(35, 114, 61, 255), 131072); // 131072
+        colorValues.Add(HexToColor("#ffc413"), 1024); // 1024 +
+        colorValues.Add(HexToColor("#0ec434"), 2048); // 2048 + 
+        colorValues.Add(HexToColor("#3998f5"), 4096); // 4096 +
+        colorValues.Add(HexToColor("#772b9d"), 8192); // 8192 +
+        colorValues.Add(HexToColor("#c3a5b4"), 16384); // 16384 +
+        colorValues.Add(HexToColor("#edeff3"), 32768); // 32768 +
+        colorValues.Add(HexToColor("#228c68"), 65536); // 65536
+        colorValues.Add(HexToColor("#235b54"), 131072); // 131072
         // colorValues.Add(new Color32(0, 38, 77, 255), 262144); // 262144
         // colorValues.Add(new Color32(61, 77, 66, 255), 524288); // 524288
         // colorValues.Add(new Color32(0, 0, 0, 255), 1048576); // 1048576

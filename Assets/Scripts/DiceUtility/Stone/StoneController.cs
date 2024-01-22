@@ -1,7 +1,9 @@
+using TylerCode.SoundSystem;
 using UnityEngine;
 
 public class StoneController : BaseDice
 {
+    public static bool instance;
     public int value = 8;
     public int Value
     {
@@ -12,15 +14,20 @@ public class StoneController : BaseDice
             builder.BuildDice(value);
         }
     }
+
+    [SerializeField] GameObject particlePrefab;
+    S4SoundSource sound;
     private bool active = false;
     private int counter = 0;
 
     DiceBuilder builder;
     private void Awake()
     {
+        instance = true;
         rb = GetComponent<Rigidbody>();
         bc = GetComponent<BoxCollider>();
         builder = GetComponent<DiceBuilder>();
+        sound = GetComponent<S4SoundSource>();
 
         EventRelay.Shooter.DiceShot.AddListener(OnDiceShot);
     }
@@ -44,5 +51,12 @@ public class StoneController : BaseDice
     {
         active = true;
         base.Shoot();
+    }
+
+    private void OnDestroy()
+    {
+        instance = false;
+        Instantiate(particlePrefab, transform.position, Quaternion.identity);
+        sound.PlaySound("Hit");
     }
 }

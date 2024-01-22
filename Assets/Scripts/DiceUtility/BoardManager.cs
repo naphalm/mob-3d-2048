@@ -6,6 +6,8 @@ public class BoardManager : MonoBehaviour
 {
     public static BoardManager Instance { get; private set; }
 
+    public int maxPow2 = 5;
+    public float fxPitch = 1f;
 
     [SerializeField]
     [Range(-10, 500)]
@@ -46,7 +48,8 @@ public class BoardManager : MonoBehaviour
 
             d1.Value *= 2;
             d1.ApplyCombineForce();
-            EventRelay.Dice.Combination.Invoke(d1.Value * 2, d1.transform);
+            d1.PlayFx(true);
+            EventRelay.Dice.Combination.Invoke(d1.Value, d1.transform);
         }
         else
         {
@@ -54,7 +57,8 @@ public class BoardManager : MonoBehaviour
 
             d2.Value *= 2;
             d2.ApplyCombineForce();
-            EventRelay.Dice.Combination.Invoke(d2.Value * 2, d2.transform);
+            d2.PlayFx(true);
+            EventRelay.Dice.Combination.Invoke(d2.Value, d2.transform);
         }
     }
 
@@ -76,6 +80,7 @@ public class BoardManager : MonoBehaviour
             bullet.transform.SetParent(shooter.transform);
             bullet.transform.SetPositionAndRotation(shooter.transform.position, shooter.transform.rotation);
             shooter.Bullet = bullet;
+            // bullet.MakeActive();
         }
     }
 

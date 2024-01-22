@@ -14,6 +14,8 @@ public class DiceQueue : MonoBehaviour
     {
         spawner = GetComponent<DiceSpawner>();
         InitializeDiceQueue();
+        EventRelay.Board.QueueIncrease.AddListener(UpdateMaxHeldDice);
+
     }
 
 #if UNITY_EDITOR
@@ -78,12 +80,16 @@ public class DiceQueue : MonoBehaviour
 
             for (int i = 0; i < diceToAdd; i++)
             {
-                BaseDice dice = SpawnNew();
+                BaseDice dice = spawner.SpawnDice();
+                dice.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+                dice.GetComponent<BoxCollider>().enabled = false;
+                dice.transform.SetParent(transform);
                 dq.Add(dice);
             }
 
             maxHeldDice = newMaxHeldDice;
             RepositionDice();
+            dq[dq.Count - 1].PlayFx(false);
         }
     }
 }

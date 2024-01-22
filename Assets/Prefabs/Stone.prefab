@@ -189,6 +189,7 @@ GameObject:
   - component: {fileID: 8595078233161039270}
   - component: {fileID: 8053791899437208027}
   - component: {fileID: 6307859533034548579}
+  - component: {fileID: 4591776138118795454}
   m_Layer: 0
   m_Name: Stone
   m_TagString: Dice
@@ -322,7 +323,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7882450363848fc4eb4066aa83a239ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  value: 8
+  value: 7
+  particlePrefab: {fileID: 141433446842962269, guid: af6bc94e23202ae4c8a65dd311853683,
+    type: 3}
 --- !u!114 &6307859533034548579
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -338,6 +341,35 @@ MonoBehaviour:
   dice: {fileID: 8053791899437208027}
   value: {fileID: 4493764651661317961}
   color: {fileID: 0}
+--- !u!114 &4591776138118795454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 881612570769237607}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1ef738f77801064baec9e8a8539ad6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _soundToPlayOnAwake: 
+  _sounds:
+  - soundName: Hit
+    closedCaption: 
+    audioClip: {fileID: 8300000, guid: c720e5dad9b94fb4dbfaf124a9291423, type: 3}
+    positionToPlay: {x: 0, y: 0, z: 0}
+    parentObject: {fileID: 0}
+    looping: 0
+    volume: 2
+    randomPitch: 1
+    minPitch: 0.9
+    maxPitch: 1.1
+    setPitch: 0
+    pitch: 0
+    isMusic: 0
+    persistSceneChange: 0
+    globalSound: 0
 --- !u!1 &1302115090900517272
 GameObject:
   m_ObjectHideFlags: 0

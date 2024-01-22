@@ -9,6 +9,7 @@ public class EventRelay : Singleton
     public static InputEventClass Input { get; private set; }
     public static DiceEventClass Dice { get; private set; }
     public static GameManagerEvents GameManager { get; private set; }
+    public static BoardEventClass Board { get; private set; }
     private void Awake()
     {
         Spawner = new();
@@ -16,6 +17,7 @@ public class EventRelay : Singleton
         Input = new();
         Dice = new();
         GameManager = new();
+        Board = new();
     }
 
 }
@@ -40,9 +42,19 @@ public class InputEventClass
 public class DiceEventClass
 {
     public UnityEvent<int, Transform> Combination = new();
+    public UnityEvent<int> DiceValueChanged = new();
 }
 
+public class BoardEventClass
+{
+    public UnityEvent<int> QueueIncrease = new();
+    public UnityEvent<int> BiggestDice = new();
+}
 public class GameManagerEvents
 {
+    public UnityEvent Replay = new();
     public UnityEvent Death = new();
+    public UnityEvent RewardedContinue = new();
+    public UnityEvent ContinueEnded = new();
+
 }

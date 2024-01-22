@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 public class DiceController : BaseDice
 {
@@ -11,11 +12,16 @@ public class DiceController : BaseDice
         {
             this.value = value;
             builder.BuildDice(value);
+            EventRelay.Dice.DiceValueChanged.Invoke(value);
         }
     }
     DiceBuilder builder;
+    FXController fx;
     private void Awake()
     {
+        fx = GetComponentInChildren<FXController>();
+        Assert.IsNotNull(fx);
+        // fx.gameObject.SetActive(false);
         rb = GetComponent<Rigidbody>();
         bc = GetComponent<BoxCollider>();
         builder = GetComponent<DiceBuilder>();
@@ -24,7 +30,7 @@ public class DiceController : BaseDice
     {
         rb.velocity = new Vector3(0, 0, 0);
         rb.AddForce(Vector3.up * BoardManager.Instance.upwardForce, ForceMode.Impulse); // Apply upward force in world space
-        rb.AddForce(Vector3.forward * BoardManager.Instance.forwardForce / 5, ForceMode.Impulse); // Apply forward force in world space
+        rb.AddForce(Vector3.forward * BoardManager.Instance.forwardForce / 3f, ForceMode.Impulse); // Apply forward force in world space
         // rb.AddForce(-Vector3.up * BoardManager.Instance.upwardForce / 1.1f, ForceMode.VelocityChange); // Apply downward force in world space
     }
 
@@ -52,6 +58,9 @@ public class DiceController : BaseDice
         }
     }
 
-
+    public override void PlayFx(bool sound)
+    {
+        fx.Play(sound);
+    }
 
 }
