@@ -10,6 +10,7 @@ public class EventRelay : Singleton
     public static DiceEventClass Dice { get; private set; }
     public static GameManagerEvents GameManager { get; private set; }
     public static BoardEventClass Board { get; private set; }
+    public static ScreenEventClass Screen { get; private set; }
     private void Awake()
     {
         Spawner = new();
@@ -18,6 +19,7 @@ public class EventRelay : Singleton
         Dice = new();
         GameManager = new();
         Board = new();
+        Screen = new();
     }
 
 }
@@ -57,4 +59,10 @@ public class GameManagerEvents
     public UnityEvent RewardedContinue = new();
     public UnityEvent ContinueEnded = new();
 
+}
+
+public class ScreenEventClass
+{
+    public UnityEvent LandscapeMode = new();
+    public UnityEvent PortraitMode = new();
 }

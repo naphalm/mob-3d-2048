@@ -1,0 +1,2 @@
+Build path: F:/UNITY_projects/mob-3D-2048/build
+Build number: 147

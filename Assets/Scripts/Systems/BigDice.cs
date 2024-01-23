@@ -11,6 +11,9 @@ public class BigDice : MonoBehaviour
     {
         spawner = GetComponent<DiceSpawner>();
         EventRelay.Board.BiggestDice.AddListener(OnBiggestDice);
+        EventRelay.Screen.LandscapeMode.AddListener(OnLandscapeMode);
+        EventRelay.Screen.PortraitMode.AddListener(OnPortraitMode);
+
         gameObject.SetActive(false);
     }
 
@@ -28,5 +31,15 @@ public class BigDice : MonoBehaviour
 
         dice.PlayFx(false);
         current = dice;
+    }
+
+    void OnPortraitMode()
+    {
+        transform.localPosition = new Vector3(-1.5f, 2.5f, 10);
+    }
+
+    void OnLandscapeMode()
+    {
+        transform.localPosition = new Vector3(8.5f, 4.5f, 8.5f);
     }
 }

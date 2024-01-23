@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class HorizontalSlider : Singleton
@@ -11,7 +12,10 @@ public class HorizontalSlider : Singleton
     private Vector3 diceStartPosition;
 
     //=============
-
+    private void Start()
+    {
+        StartCoroutine(UpdateSensitivity());
+    }
     private void Update()
     {
         // Check for mouse or touch input
@@ -46,5 +50,22 @@ public class HorizontalSlider : Singleton
             inputPosition.y / Screen.height,
             inputPosition.z
         );
+    }
+
+    private IEnumerator UpdateSensitivity()
+    {
+        while (true)
+        {
+            // Calculate sensitivity based on screen width
+            sensitivity = Map(Screen.width, 430f, 1920f, 3f, 20f);
+
+            // Check every 2 seconds
+            yield return new WaitForSeconds(2f);
+        }
+    }
+
+    private float Map(float value, float inMin, float inMax, float outMin, float outMax)
+    {
+        return (value - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
     }
 }
