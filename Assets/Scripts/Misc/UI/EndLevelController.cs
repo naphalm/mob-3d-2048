@@ -8,7 +8,7 @@ public class EndLevelController : MonoBehaviour
 {
     public TextMeshProUGUI combinations;
     public TextMeshProUGUI qsize;
-    public TextMeshProUGUI score;
+    public TextMeshProUGUI maxCombos;
     public TextMeshProUGUI biggestDice;
 
 
@@ -16,7 +16,7 @@ public class EndLevelController : MonoBehaviour
     {
         Assert.IsNotNull(combinations);
         Assert.IsNotNull(qsize);
-        Assert.IsNotNull(score);
+        Assert.IsNotNull(maxCombos);
         Assert.IsNotNull(biggestDice);
     }
 
@@ -36,7 +36,7 @@ public class EndLevelController : MonoBehaviour
     {
         combinations.text = ProgressTracker.Instance.combinationCounter.ToString();
         qsize.text = ProgressTracker.Instance.queueCounter.ToString();
-        score.text = ProgressTracker.Instance.score.ToString();
+        maxCombos.text = "X" + ProgressTracker.Instance.maxCombos.ToString();
         biggestDice.text = ProgressTracker.Instance.biggestDice.ToString();
     }
 

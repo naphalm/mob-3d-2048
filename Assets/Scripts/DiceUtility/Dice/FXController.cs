@@ -18,16 +18,41 @@ public class FXController : MonoBehaviour
         fx.Stop();
         sound = GetComponent<S4SoundSource>();
         Assert.IsNotNull(fx, "S4Sound not found!");
+
+        // EventRelay.Board.Bonus.AddListener(OnCombine);
     }
 
-    public void Play(bool withSound)
+    public void Play(bool withSound, int nrSound)
     {
         fx.Play();
         if (withSound)
         {
-            sound.PlaySoundWithSetPitch("Combine", BoardManager.Instance.fxPitch);
+            var ss = "Combine1";
+            if (nrSound == 2)
+            {
+                ss = "Combine2";
+            }
+            else if (nrSound > 2)
+            {
+                ss = "Combine3";
+            }
+
+            sound.PlaySound(ss);
         }
     }
+
+    /*
+    if (counter == 2)
+        {
+            BoardManager.Instance.fxPitch = secondPitch;
+        }
+        else if (counter > 2)
+        {
+            BoardManager.Instance.fxPitch = thirdPitch;
+        }
+    */
+
+
 
 
 }

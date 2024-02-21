@@ -28,7 +28,7 @@ public class ScoreController : ScreenSizeHandle
         highScoreText.text = highScore.ToString();
     }
 
-    private void OnDiceCombination(int value, Transform transform)
+    private void OnDiceCombination(int value, DiceController transform)
     {
         AddScore(value * 10 + 1);
     }

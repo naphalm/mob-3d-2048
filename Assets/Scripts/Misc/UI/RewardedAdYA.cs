@@ -5,6 +5,7 @@ using YG;
 public class RewardedAdYa : MonoBehaviour
 {
     [SerializeField] int AdID;
+    [SerializeField] Button button;
 
     int moneyCount = 0;
 
@@ -15,7 +16,7 @@ public class RewardedAdYa : MonoBehaviour
 
     void OnContinue()
     {
-        GetComponent<Button>().interactable = false;
+        button.interactable = false;
     }
 }
 

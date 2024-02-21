@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using YG;
 
 public class HorizontalSlider : Singleton
 {
@@ -14,7 +15,9 @@ public class HorizontalSlider : Singleton
     //=============
     private void Start()
     {
-        StartCoroutine(UpdateSensitivity());
+        EventRelay.Screen.LandscapeMode.AddListener(OnLandscapeMode);
+        EventRelay.Screen.PortraitMode.AddListener(OnPortraitMode);
+        UpdateSensitivity();
     }
     private void Update()
     {
@@ -52,20 +55,32 @@ public class HorizontalSlider : Singleton
         );
     }
 
-    private IEnumerator UpdateSensitivity()
+    private void UpdateSensitivity()
     {
-        while (true)
+
+        if (YandexGame.EnvironmentData.deviceType == "mobile")
         {
-            // Calculate sensitivity based on screen width
-            sensitivity = Map(Screen.width, 430f, 1920f, 3f, 20f);
-
-            // Check every 2 seconds
-            yield return new WaitForSeconds(2f);
+            sensitivity = 6f;
         }
+        else if (YandexGame.EnvironmentData.deviceType == "desktop")
+        {
+            sensitivity = 20f;
+        }
+
     }
 
-    private float Map(float value, float inMin, float inMax, float outMin, float outMax)
+    protected void OnPortraitMode()
     {
-        return (value - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
+        sensitivity = 6f;
     }
+
+    protected void OnLandscapeMode()
+    {
+        sensitivity = 20f;
+    }
+
+    // private float Map(float value, float inMin, float inMax, float outMin, float outMax)
+    // {
+    //     return (value - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
+    // }
 }

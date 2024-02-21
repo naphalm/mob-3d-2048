@@ -43,7 +43,7 @@ public class InputEventClass
 
 public class DiceEventClass
 {
-    public UnityEvent<int, Transform> Combination = new();
+    public UnityEvent<int, DiceController> Combination = new();
     public UnityEvent<int> DiceValueChanged = new();
 }
 
@@ -51,6 +51,9 @@ public class BoardEventClass
 {
     public UnityEvent<int> QueueIncrease = new();
     public UnityEvent<int> BiggestDice = new();
+    public UnityEvent<int> Bonus = new();
+    public UnityEvent ResetBonus = new();
+
 }
 public class GameManagerEvents
 {

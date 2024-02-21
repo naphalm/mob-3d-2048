@@ -29,7 +29,7 @@ public class BigDice : MonoBehaviour
 
         dice.Value = value;
 
-        dice.PlayFx(false);
+        dice.PlayFx(false, 0);
         current = dice;
     }
 

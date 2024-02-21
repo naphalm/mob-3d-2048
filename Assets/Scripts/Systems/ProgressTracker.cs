@@ -10,6 +10,11 @@ public class ProgressTracker : MonoBehaviour
     public int queueCounter = 1;
     public int biggestDice = 0;
     public int score = 0;
+    public int maxCombos = 0;
+
+
+    private int currentCombo = 1;
+
 
     private void Start()
     {
@@ -18,13 +23,14 @@ public class ProgressTracker : MonoBehaviour
         EventRelay.Dice.Combination.AddListener(OnDiceCombination);
         EventRelay.Board.QueueIncrease.AddListener(OnQueueIncrease);
         EventRelay.Dice.DiceValueChanged.AddListener(BiggestValueTracker);
+        EventRelay.Board.Bonus.AddListener(BonusTrack);
     }
 
     // The method to handle the event
-    private void OnDiceCombination(int value, Transform transform)
+    private void OnDiceCombination(int value, DiceController transform)
     {
         combinationCounter++;
-        score += value * 10 + 1;
+        score += value * currentCombo * 5 + 1;
         tracker.QUpgCheck(combinationCounter);
     }
 
@@ -43,6 +49,15 @@ public class ProgressTracker : MonoBehaviour
             {
                 EventRelay.Board.BiggestDice.Invoke(value);
             }
+        }
+    }
+
+    void BonusTrack(int combo)
+    {
+        currentCombo = combo;
+        if (combo > maxCombos)
+        {
+            maxCombos = combo;
         }
     }
 

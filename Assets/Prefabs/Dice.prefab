@@ -1479,18 +1479,48 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _soundToPlayOnAwake: 
   _sounds:
-  - soundName: Combine
+  - soundName: Combine1
     closedCaption: 
-    audioClip: {fileID: 8300000, guid: 2acb75d7981b62840bb3b6449fed5623, type: 3}
+    audioClip: {fileID: 8300000, guid: bd36c4eab1033b042958fdb79f863183, type: 3}
     positionToPlay: {x: 0, y: 0, z: 0}
     parentObject: {fileID: 8194561623320682390}
     looping: 0
-    volume: 0.5
+    volume: 1
     randomPitch: 0
-    minPitch: 1.5
-    maxPitch: 1.8
+    minPitch: 0
+    maxPitch: 0
     setPitch: 1
-    pitch: 5
+    pitch: 1
+    isMusic: 0
+    persistSceneChange: 0
+    globalSound: 0
+  - soundName: Combine2
+    closedCaption: 
+    audioClip: {fileID: 8300000, guid: 28418ce191d68374d9915c57b63b19df, type: 3}
+    positionToPlay: {x: 0, y: 0, z: 0}
+    parentObject: {fileID: 8194561623320682390}
+    looping: 0
+    volume: 1
+    randomPitch: 0
+    minPitch: 0
+    maxPitch: 0
+    setPitch: 1
+    pitch: 1
+    isMusic: 0
+    persistSceneChange: 0
+    globalSound: 0
+  - soundName: Combine3
+    closedCaption: 
+    audioClip: {fileID: 8300000, guid: a2260a0831270d94da31e824eaf010bd, type: 3}
+    positionToPlay: {x: 0, y: 0, z: 0}
+    parentObject: {fileID: 8194561623320682390}
+    looping: 0
+    volume: 1
+    randomPitch: 0
+    minPitch: 0
+    maxPitch: 0
+    setPitch: 1
+    pitch: 1
     isMusic: 0
     persistSceneChange: 0
     globalSound: 0

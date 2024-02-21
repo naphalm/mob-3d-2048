@@ -17,9 +17,9 @@ public class HeartController : BaseDice
             if (other.gameObject.GetComponent<DiceController>())
             {
                 var dice = other.gameObject.GetComponent<DiceController>();
+                EventRelay.Dice.Combination.Invoke(dice.Value, dice);
                 dice.Value *= 2;
                 dice.ApplyCombineForce();
-                dice.PlayFx(true);
                 Destroy(gameObject);
             }
         }

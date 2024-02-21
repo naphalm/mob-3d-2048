@@ -58,9 +58,9 @@ public class DiceController : BaseDice
         }
     }
 
-    public override void PlayFx(bool sound)
+    public override void PlayFx(bool soundOn, int nrSound)
     {
-        fx.Play(sound);
+        fx.Play(soundOn, nrSound);
     }
 
 }

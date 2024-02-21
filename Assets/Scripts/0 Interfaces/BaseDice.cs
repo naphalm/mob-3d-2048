@@ -38,7 +38,7 @@ public class BaseDice : MonoBehaviour, IBullet
         Destroy(gameObject);
     }
 
-    public virtual void PlayFx(bool activeSound)
+    public virtual void PlayFx(bool activeSound, int nrSound)
     {
 
     }

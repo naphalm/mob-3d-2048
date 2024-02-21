@@ -7,8 +7,6 @@ public class BoardManager : MonoBehaviour
     public static BoardManager Instance { get; private set; }
 
     public int maxPow2 = 5;
-    public float fxPitch = 1f;
-
     [SerializeField]
     [Range(-10, 500)]
     public float forwardForce = 5f;
@@ -48,8 +46,8 @@ public class BoardManager : MonoBehaviour
 
             d1.Value *= 2;
             d1.ApplyCombineForce();
-            d1.PlayFx(true);
-            EventRelay.Dice.Combination.Invoke(d1.Value, d1.transform);
+            // d1.PlayFx(true);
+            EventRelay.Dice.Combination.Invoke(d1.Value, d1);
         }
         else
         {
@@ -57,8 +55,8 @@ public class BoardManager : MonoBehaviour
 
             d2.Value *= 2;
             d2.ApplyCombineForce();
-            d2.PlayFx(true);
-            EventRelay.Dice.Combination.Invoke(d2.Value, d2.transform);
+            // d2.PlayFx(true);
+            EventRelay.Dice.Combination.Invoke(d2.Value, d2);
         }
     }
 

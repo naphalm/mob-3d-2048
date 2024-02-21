@@ -42,7 +42,7 @@ public class StoneController : BaseDice
             }
             if (Value == 0)
             {
-                Destroy(gameObject);
+                DestroyStone();
             }
         }
     }
@@ -53,10 +53,11 @@ public class StoneController : BaseDice
         base.Shoot();
     }
 
-    private void OnDestroy()
+    private void DestroyStone()
     {
         instance = false;
         Instantiate(particlePrefab, transform.position, Quaternion.identity);
         sound.PlaySound("Hit");
+        Destroy(gameObject);
     }
 }

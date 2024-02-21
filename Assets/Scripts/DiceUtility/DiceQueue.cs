@@ -89,7 +89,7 @@ public class DiceQueue : MonoBehaviour
 
             maxHeldDice = newMaxHeldDice;
             RepositionDice();
-            dq[dq.Count - 1].PlayFx(false);
+            dq[dq.Count - 1].PlayFx(false, 0);
         }
     }
 }
