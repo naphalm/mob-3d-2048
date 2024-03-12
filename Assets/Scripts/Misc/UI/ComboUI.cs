@@ -34,7 +34,7 @@ public class ComboUI : MonoBehaviour
     protected void OnPortraitMode()
     {
         transform.localScale = new Vector3(1.7f, 1.7f, 1.7f);
-        transform.localPosition = new Vector3(-170, 1050, 0);
+        transform.localPosition = new Vector3(0, -130, 0);
     }
 
     protected void OnLandscapeMode()

@@ -1,14 +1,19 @@
 using System.Collections;
 using UnityEngine;
+using YG;
 
 public class MobileHandler : MonoBehaviour
 {
-    public float checkIntervalSeconds = 2f;
+    public float checkIntervalSeconds = .5f;
 
     void Awake()
     {
         CheckScreen();
-        StartCoroutine(CheckOrientationCoroutine());
+
+        if (YandexGame.EnvironmentData.isMobile)
+        {
+            StartCoroutine(CheckOrientationCoroutine());
+        }
     }
 
     IEnumerator CheckOrientationCoroutine()
@@ -17,7 +22,6 @@ public class MobileHandler : MonoBehaviour
         {
             yield return new WaitForSeconds(checkIntervalSeconds);
             CheckScreen();
-
         }
     }
 
@@ -26,7 +30,7 @@ public class MobileHandler : MonoBehaviour
         if (Screen.width > Screen.height)
         {
             // Debug.Log("Landscape Mode");
-            EventRelay.Screen.LandscapeMode.Invoke();
+            // EventRelay.Screen.LandscapeMode.Invoke();
         }
         else
         {

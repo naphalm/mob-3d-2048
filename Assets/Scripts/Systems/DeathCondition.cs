@@ -1,73 +1,66 @@
 using System.Collections;
 using UnityEngine;
+
 public class DeathCondition : MonoBehaviour
 {
-    int counter = 0;
     BoxCollider bc;
+    GameObject enteredObject; // Reference to the object that entered the trigger
+
     private void Start()
     {
         bc = GetComponent<BoxCollider>();
         EventRelay.GameManager.Death.AddListener(OnLevelEnd);
         EventRelay.GameManager.ContinueEnded.AddListener(OnContinueEnded);
-        counter = 0;
     }
+
     private Coroutine timerCoroutine;
-    public readonly float timerThreshold = .5f;
-
-
+    public readonly float timerThreshold = 1.0f;
 
     private void OnTriggerEnter(Collider other)
     {
-
-        // Increase dice counter
-        counter++;
-
-        if (counter >= 1)
-        {
-            timerCoroutine = StartCoroutine(StartTimerCoroutine());
-        }
-
+        enteredObject = other.gameObject;
+        timerCoroutine = StartCoroutine(StartTimerCoroutine());
     }
 
     private void OnTriggerExit(Collider other)
     {
-
-        // Decrease dice counter
-        counter--;
-
-        // If there are no more dice, stop the timer
-        if (counter < 1 && timerCoroutine != null)
+        // Check if the object exiting the trigger is the same as the one entered
+        if (other.gameObject == enteredObject)
         {
             StopCoroutine(timerCoroutine);
-            timerCoroutine = null;
+            enteredObject = null;
         }
-
     }
 
     private IEnumerator StartTimerCoroutine()
     {
-        yield return new WaitForSeconds(timerThreshold);
+        float timer = 0f;
+        while (timer < timerThreshold)
+        {
+            timer += Time.deltaTime;
+            yield return null; // Wait for the next frame
+        }
 
-        // Perform the desired action when the timer reaches the threshold
-        HandleTimerThreshold();
+        // Check if the entered object is still valid before invoking the death condition
+        if (enteredObject != null)
+        {
+            HandleTimerThreshold();
+        }
     }
 
     private void HandleTimerThreshold()
     {
-        if (counter > 0)
-        {
-            Debug.Log("DEATH!");
-            EventRelay.GameManager.Death.Invoke();
-        }
+        Debug.Log("DEATH!");
+        EventRelay.GameManager.Death.Invoke();
     }
 
     void OnLevelEnd()
     {
         bc.enabled = false;
     }
+
     void OnContinueEnded()
     {
         bc.enabled = true;
-        counter = 0;
     }
 }

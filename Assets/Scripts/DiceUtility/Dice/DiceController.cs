@@ -17,6 +17,7 @@ public class DiceController : BaseDice
     }
     DiceBuilder builder;
     FXController fx;
+
     private void Awake()
     {
         fx = GetComponentInChildren<FXController>();
@@ -26,6 +27,7 @@ public class DiceController : BaseDice
         bc = GetComponent<BoxCollider>();
         builder = GetComponent<DiceBuilder>();
     }
+
     public void ApplyCombineForce()
     {
         rb.velocity = new Vector3(0, 0, 0);
@@ -53,7 +55,7 @@ public class DiceController : BaseDice
             var d2 = other.gameObject.GetComponent<DiceController>();
             if (d2 != null && d2.Value == Value)
             {
-                BoardManager.CombineDices(this, d2);
+                BoardManager.CombineDices(d2, this);
             }
         }
     }
@@ -62,5 +64,4 @@ public class DiceController : BaseDice
     {
         fx.Play(soundOn, nrSound);
     }
-
 }
